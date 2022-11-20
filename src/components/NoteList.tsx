@@ -2,7 +2,7 @@ import React, {useContext, useMemo, useState} from 'react';
 import {Badge, Button, Card, Col, Form, Modal, Row, Stack} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import ReactSelect from "react-select";
-import {Note, Tag} from "./app/App";
+import {Note, Tag} from "../store/NoteProvider";
 import styles from './NoteList.module.css';
 import NoteContext from "../store/note-context";
 
