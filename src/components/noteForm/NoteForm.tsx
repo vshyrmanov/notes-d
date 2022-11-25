@@ -44,8 +44,9 @@ const NoteForm = ({ title = "", markdown = "", tags = [], imgs = [], onSubmit  }
 		navigate("..");
 	}
 
-const addFile = (file: Blob) => {
-	let reader = new FileReader();
+const addFile = (event: any) => {
+		const file = event.target.files[0];
+	const reader = new FileReader();
 	if ( file !== null) {
 		reader.readAsDataURL(file && file)
 		reader.onloadend = () => {
@@ -136,7 +137,7 @@ const handleCloseModal = () => setShowModal(false);
 								type="file"
 								id="img_file"
 								style={{visibility: 'hidden', position: 'absolute'}}
-								onChange={(e: Event<HTMLInputElement>) => addFile(e.target.files[0])}
+								onChange={addFile}
 						/>
 					</Stack>
 					<Stack direction="horizontal" gap={2} className="justify-content-end">

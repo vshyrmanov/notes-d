@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useNote} from "./../NoteLayout";
+import {useNote} from "../NoteLayout";
 import {Badge, Button, Col, Row, Stack} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
@@ -11,7 +11,7 @@ const Note = () => {
 	const { onDeleteNote } = useContext(NoteContext);
 	const note = useNote();
 	const navigate = useNavigate();
-
+	
 	return (
 			<>
 				<Row className="align-items-center mb-4">
@@ -46,7 +46,7 @@ const Note = () => {
 					{note.markdown}
 				</ReactMarkdown>
 				<Row className="align-items-center mb-4">
-					{note.imgs.map(img =>
+					{note?.imgs?.map(img =>
 							<img key={img.id} src={img.imageUrl} style={{ height: "100px", width: "100px" }} />
 					)}
 				</Row>
