@@ -1,0 +1,23 @@
+.imageItem {
+    width: fit-content;
+    height: 75px;
+}
+
+.imageCard {
+    border: none;
+}
+
+.imageCard:hover:after {
+    content: '+';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: inherit;
+    cursor: pointer;
+}

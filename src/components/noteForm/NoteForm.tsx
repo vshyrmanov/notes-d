@@ -130,7 +130,6 @@ const handleCloseModal = () => setShowModal(false);
 						)}
 					</Stack>}
 					<PreviewImageModal show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
-
 					<Stack direction="horizontal" gap={2} className="justify-content-end">
 						<Button type="button" as="label" htmlFor="img_file" variant="primary">Add attachment</Button>
 						<input
@@ -154,7 +153,7 @@ const handleCloseModal = () => setShowModal(false);
 
 export default NoteForm;
 
-function PreviewImageModal ({ show, handleClose, imageUrl }: PreviewImageModalProps) {
+export function PreviewImageModal ({ show, handleClose, imageUrl }: PreviewImageModalProps) {
 	return (
 			<Modal show={show} onHide={handleClose} size="lg">
 				<Modal.Header closeButton />
