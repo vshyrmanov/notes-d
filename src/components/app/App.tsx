@@ -13,9 +13,7 @@ function App() {
       <NoteProvider>
       <Container className="my-4">
         <Routes>
-          <Route path="/" element={
-            <Home />
-          } />
+          <Route path="/" element={<Home />} />
           <Route path="/new" element={ <Create />} />
           <Route path="/:id" element={ <NoteLayout />}>
             <Route index element={ <Element />} />

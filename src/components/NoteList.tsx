@@ -130,33 +130,33 @@ function NoteCard ({ id, title, tags }: SimplifiedNote) {
 					)}
 				</Stack>
 			</Card.Body>
-
 		</Card>
 	)
 }
 
 function EditTagsModal ({ availableTags, show, handleClose, onDelete, onUpdate } : EditTagsModalProps) {
-	return <Modal show={show} onHide={handleClose}>
-		<Modal.Header closeButton>
-			<Modal.Title>Edit tags</Modal.Title>
+	return (
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Edit tags</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form>
+						<Stack gap={2}>
+							{availableTags.map(tag => (
+									<Row key={tag.id}>
+										<Col >
+											<Form.Control type="text" value={tag.label} onChange={(event) => onUpdate(tag.id, event.target.value)}/>
 
-		</Modal.Header>
-		<Modal.Body>
-			<Form>
-				<Stack gap={2}>
-					{availableTags.map(tag => (
-							<Row key={tag.id}>
-								<Col >
-									<Form.Control type="text" value={tag.label} onChange={(event) => onUpdate(tag.id, event.target.value)}/>
-
-								</Col>
-								<Col xs="auto">
-									<Button variant="outline-danger" onClick={() => onDelete(tag.id)}>&times;</Button>
-								</Col>
-							</Row>
-					))}
-				</Stack>
-			</Form>
-		</Modal.Body>
-	</Modal>
+										</Col>
+										<Col xs="auto">
+											<Button variant="outline-danger" onClick={() => onDelete(tag.id)}>&times;</Button>
+										</Col>
+									</Row>
+							))}
+						</Stack>
+					</Form>
+				</Modal.Body>
+			</Modal>
+			)
 }

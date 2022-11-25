@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import NoteForm from "./NoteForm";
+import NoteForm from "./noteForm/NoteForm";
 import {useNote} from "./NoteLayout";
 import NoteContext from "../store/note-context";
 
@@ -14,6 +14,7 @@ const EditNote = () => {
 						title={note.title}
 						markdown={note.markdown}
 						tags={note.tags}
+						imgs={note.imgs}
 						onSubmit={data => onUpdateNote(note.id, data)}
 				/>
 			</>

@@ -21,6 +21,7 @@ export type NoteData = {
 	title: string,
 	markdown: string,
 	tags: Tag[],
+	imgs: Image[],
 }
 
 export type Tag = {
@@ -28,10 +29,16 @@ export type Tag = {
 	label: string,
 }
 
+export type Image = {
+	id: string,
+	imageUrl: string,
+}
+
 // @ts-ignore
 const NoteProvider = ({ children }) => {
 	const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
 	const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+	const [imgs, setImgs] = useLocalStorage<Image[]>("IMGS", []);
 
 	const notesWithTags = useMemo(() => {
 		return notes.map((note: RawNoteData) => {
@@ -66,6 +73,10 @@ const NoteProvider = ({ children }) => {
 	  setTags(prev => [...prev, tag]);
 	}
 
+	const addImage = (image: Image) => {
+		setImgs(prev => [...prev, image]);
+	}
+
 	const updateTag = (id: string, label: string) => {
 	  setTags(prevTags => {
 	    return prevTags.map(tag => {
@@ -84,6 +95,12 @@ const NoteProvider = ({ children }) => {
 	  })
 	}
 
+	const deleteImage = (id: string) => {
+		setImgs(prevImages => {
+			return prevImages.filter(image => image.id !== id)
+		})
+	}
+
 	const contextData = {
 		notes,
 		setNotes,
@@ -95,6 +112,9 @@ const NoteProvider = ({ children }) => {
 		addTag,
 		updateTag,
 		deleteTag,
+		addImage,
+		deleteImage,
+		imgs,
 	}
 
 	return (

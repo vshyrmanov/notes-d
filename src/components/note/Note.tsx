@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import {useNote} from "./NoteLayout";
+import {useNote} from "./../NoteLayout";
 import {Badge, Button, Col, Row, Stack} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
-import NoteContext from "../store/note-context";
-import {Tag} from "../store/NoteProvider";
+import NoteContext from "../../store/note-context";
+import {Tag} from "../../store/NoteProvider";
 
 const Note = () => {
 	// @ts-ignore
@@ -26,7 +26,6 @@ const Note = () => {
 									))}
 								</Stack>
 						)}
-
 					</Col>
 					<Col xs="auto">
 						<Stack direction="horizontal" gap={2}>
@@ -46,7 +45,11 @@ const Note = () => {
 				<ReactMarkdown>
 					{note.markdown}
 				</ReactMarkdown>
-				
+				<Row className="align-items-center mb-4">
+					{note.imgs.map(img =>
+							<img key={img.id} src={img.imageUrl} style={{ height: "100px", width: "100px" }} />
+					)}
+				</Row>
 			</>
 	);
 };
