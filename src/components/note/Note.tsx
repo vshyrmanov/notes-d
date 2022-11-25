@@ -7,6 +7,7 @@ import NoteContext from "../../store/note-context";
 import {Tag} from "../../store/NoteProvider";
 import classes from './Note.module.css';
 import { PreviewImageModal } from '../noteForm/NoteForm';
+import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
 
 const Note = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -45,14 +46,14 @@ const Note = () => {
 					<Col xs="auto">
 						<Stack direction="horizontal" gap={2}>
 							<Link to={`/${note.id}/edit`}>
-								<Button variant="primary">Edit</Button>
+								<NeobrutalButton variant="primary">Edit</NeobrutalButton>
 							</Link>
-							<Button variant="outline-danger" onClick={() => {
+							<NeobrutalButton variant="outline-danger" onClick={() => {
 								onDeleteNote(note.id)
 								navigate('/')
-							}}>Delete</Button>
+							}}>Delete</NeobrutalButton>
 							<Link to="/">
-							<Button variant="outline-secondary">Back</Button>
+							<NeobrutalButton variant="outline-secondary">Back</NeobrutalButton>
 							</Link>
 						</Stack>
 					</Col>

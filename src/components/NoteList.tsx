@@ -5,6 +5,7 @@ import ReactSelect from "react-select";
 import {Note, Tag} from "../store/NoteProvider";
 import styles from './NoteList.module.css';
 import NoteContext from "../store/note-context";
+import NeobrutalButton from './UI/neobrutalButton/NeobrutalButton';
 
 type SimplifiedNote = {
 	tags: Tag[],
@@ -56,9 +57,9 @@ const NoteList = () => {
 					<Col xs="auto">
 						<Stack direction="horizontal" gap={2}>
 							<Link to="/new">
-								<Button variant="primary">Create</Button>
+								<NeobrutalButton>Create</NeobrutalButton>
 							</Link>
-								<Button variant="outline-secondary" onClick={handleOpenTagsModal}>Edit tags</Button>
+								<NeobrutalButton variant="outline-secondary" onClick={handleOpenTagsModal}>Edit tags</NeobrutalButton>
 						</Stack>
 					</Col>
 				</Row>
@@ -150,7 +151,7 @@ function EditTagsModal ({ availableTags, show, handleClose, onDelete, onUpdate }
 
 										</Col>
 										<Col xs="auto">
-											<Button variant="outline-danger" onClick={() => onDelete(tag.id)}>&times;</Button>
+											<NeobrutalButton variant="outline-danger" onClick={() => onDelete(tag.id)}>&times;</NeobrutalButton>
 										</Col>
 									</Row>
 							))}

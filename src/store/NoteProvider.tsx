@@ -55,7 +55,7 @@ const NoteProvider = ({ children }) => {
 	  setNotes(prevNotes => {
 	    return prevNotes.map(note => {
 	      if (note.id === id) {
-	        return {...note, ...data, tags: tags.map(tag => tag.id)}
+	        return {...note, ...data, tags: tags.map(tag => tag.id), tagIds: tags.map(tag => tag.id)}
 	      } else {
 	        return note
 	      }

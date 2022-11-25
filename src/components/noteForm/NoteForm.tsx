@@ -6,6 +6,7 @@ import { v4 as uuidV4 } from "uuid";
 import NoteContext from "../../store/note-context";
 import {NoteData, Tag, Image} from "../../store/NoteProvider";
 import classes from './NoteForm.module.css';
+import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
 
 type NoteFormProps = {
 	onSubmit: (data: NoteData) => void,
@@ -32,7 +33,7 @@ const NoteForm = ({ title = "", markdown = "", tags = [], imgs = [], onSubmit  }
 	const [showImage, setShowImage] = useState<Image[]>(imgs);
 	const [showModal, setShowModal] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
-
+	
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		onSubmit({
@@ -131,7 +132,7 @@ const handleCloseModal = () => setShowModal(false);
 					</Stack>}
 					<PreviewImageModal show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
 					<Stack direction="horizontal" gap={2} className="justify-content-end">
-						<Button type="button" as="label" htmlFor="img_file" variant="primary">Add attachment</Button>
+						<NeobrutalButton type="button" as="label" htmlFor="img_file" variant="primary">Add attachment</NeobrutalButton>
 						<input
 								type="file"
 								id="img_file"
@@ -141,9 +142,9 @@ const handleCloseModal = () => setShowModal(false);
 					</Stack>
 					<Stack direction="horizontal" gap={2} className="justify-content-end">
 
-						<Button type="submit" variant="primary">Save</Button>
+						<NeobrutalButton type="submit" variant="primary">Save</NeobrutalButton>
 						<Link to="..">
-							<Button type="button" variant="outline-secondary">Cancel</Button>
+							<NeobrutalButton type="button" variant="outline-secondary">Cancel</NeobrutalButton>
 						</Link>
 					</Stack>
 				</Stack>
