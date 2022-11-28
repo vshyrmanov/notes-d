@@ -15,7 +15,7 @@ const EditNote = () => {
 						markdown={note.markdown}
 						tags={note.tags}
 						imgs={note.imgs}
-						onSubmit={data => onUpdateNote(note.id, data)}
+						onSubmit={(data: any) => onUpdateNote(note.id, data)}
 				/>
 			</>
 	);

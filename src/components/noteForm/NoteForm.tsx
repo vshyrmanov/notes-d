@@ -7,8 +7,21 @@ import NoteContext from "../../store/note-context";
 import {NoteData, Tag, Image} from "../../store/NoteProvider";
 import classes from './NoteForm.module.css';
 import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
-import { NoteFormProps, PreviewImageModalProps } from './types';
 import PreviewImg from '../modals/previewImg/PreviewImg';
+
+type NoteFormProps = {
+	onSubmit: (data: NoteData) => void,
+} & Partial<NoteData>
+
+type PreviewImageModalProps = {
+	show: boolean,
+	handleClose: () => void,
+	imageUrl: string,
+}
+
+interface Event<T = EventTarget> {
+	target: T
+}
 
 const NoteForm = ({ title = "", markdown = "", tags = [], imgs = [], onSubmit  }: NoteFormProps) => {
 	// @ts-ignore
