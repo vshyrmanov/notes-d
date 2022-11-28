@@ -2,35 +2,17 @@ import React, {useContext, useMemo, useState} from 'react';
 import {Badge, Button, Card, Col, Form, Modal, Row, Stack} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import ReactSelect from "react-select";
-import {Note, Tag} from "../store/NoteProvider";
+import {Note, Tag} from "../../store/NoteProvider";
 import styles from './NoteList.module.css';
-import NoteContext from "../store/note-context";
-import NeobrutalButton from './UI/neobrutalButton/NeobrutalButton';
-
-type SimplifiedNote = {
-	tags: Tag[],
-	title: string,
-	id: string,
-}
-
-type NoteListProps = {
-	availableTags: Tag[],
-	notes: SimplifiedNote[],
-	updateTag: (id: string, label: string) => void,
-	deleteTag: (id: string) => void,
-}
-
-type EditTagsModalProps = {
-	availableTags: Tag[],
-	show: boolean,
-	handleClose: () => void,
-	onDelete: (id: string) => void,
-	onUpdate: (id: string, label: string) => void
-}
+import NoteContext from "../../store/note-context";
+import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
+import NoteCard from '../noteCard/NoteCard';
+import MainModal from '../UI/modal/MainModal';
+import EditTags from '../modals/editTags/EditTags';
 
 const NoteList = () => {
 	// @ts-ignore
-	const { tags: availableTags, notesWithTags: notes, updateTag, deleteTag } = useContext<NoteListProps>(NoteContext);
+	const { tags: availableTags, notesWithTags: notes, updateTag, deleteTag } = useContext(NoteContext);
 	const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 	const [title, setTitle] = useState<string>("");
 	const [editTagsModalOpen, setEditTagsModalOpen] = useState(false);
@@ -59,7 +41,13 @@ const NoteList = () => {
 							<Link to="/new">
 								<NeobrutalButton>Create</NeobrutalButton>
 							</Link>
-								<NeobrutalButton variant="outline-secondary" onClick={handleOpenTagsModal}>Edit tags</NeobrutalButton>
+							{availableTags.length > 0 &&
+							<NeobrutalButton
+									variant="outline-secondary"
+									onClick={handleOpenTagsModal}
+							>
+									Edit tags
+							</NeobrutalButton>}
 						</Stack>
 					</Col>
 				</Row>
@@ -99,7 +87,7 @@ const NoteList = () => {
 							</Col>
 					))}
 				</Row>
-				<EditTagsModal
+				<EditTags
 						show={editTagsModalOpen}
 						handleClose={handleCloseTagsModal}
 						availableTags={availableTags}
@@ -111,53 +99,3 @@ const NoteList = () => {
 };
 
 export default NoteList;
-
-
-
-function NoteCard ({ id, title, tags }: SimplifiedNote) {
-	return (
-		<Card as={Link} to={`/${id}`} className={`h-100 text-reset text-decoration-none ${styles.card}`}>
-			<Card.Body>
-				<Stack gap={2} className="align-items-center justify-content-center h-100">
-					<span className="fs-5">{title}</span>
-					{tags.length > 0 && (
-							<Stack gap={2} direction="horizontal" className="justify-content-center flex-wrap ">
-								{tags.map(tag => (
-										<Badge className="text-truncate" key={tag.id}>
-											{tag.label}
-										</Badge>
-								))}
-							</Stack>
-					)}
-				</Stack>
-			</Card.Body>
-		</Card>
-	)
-}
-
-function EditTagsModal ({ availableTags, show, handleClose, onDelete, onUpdate } : EditTagsModalProps) {
-	return (
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Edit tags</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Stack gap={2}>
-							{availableTags.map(tag => (
-									<Row key={tag.id}>
-										<Col >
-											<Form.Control type="text" value={tag.label} onChange={(event) => onUpdate(tag.id, event.target.value)}/>
-
-										</Col>
-										<Col xs="auto">
-											<NeobrutalButton variant="outline-danger" onClick={() => onDelete(tag.id)}>&times;</NeobrutalButton>
-										</Col>
-									</Row>
-							))}
-						</Stack>
-					</Form>
-				</Modal.Body>
-			</Modal>
-			)
-}

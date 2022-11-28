@@ -1,5 +1,5 @@
 import React from 'react';
-import NewNote from "../components/NewNote";
+import NewNote from "../components/newNote/NewNote";
 
 const Create = () => {
 	return (

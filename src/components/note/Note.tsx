@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react';
-import {useNote} from "../NoteLayout";
+import {useNote} from "../layout/NoteLayout";
 import {Badge, Button, Card, Col, Row, Stack} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import NoteContext from "../../store/note-context";
 import {Tag} from "../../store/NoteProvider";
 import classes from './Note.module.css';
-import { PreviewImageModal } from '../noteForm/NoteForm';
+import PreviewImg from '../modals/previewImg/PreviewImg';
 import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
 
 const Note = () => {
@@ -18,7 +18,6 @@ const Note = () => {
 			setShowModal(true);
 			setPreviewImage(imageUrl)
 		}
-
 	}
 	const handleCloseModal = () => {
 		setShowModal(false);
@@ -77,7 +76,7 @@ const Note = () => {
 								</Card>
 						)}
 					</Stack>
-					<PreviewImageModal show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
+					<PreviewImg show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
 				</Row>
 			</>
 	);

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Container } from "react-bootstrap";
-import NoteLayout from "../NoteLayout";
+import NoteLayout from "../layout/NoteLayout";
 import Home from '../../pages/Home';
 import Create from '../../pages/Create';
 import Element from '../../pages/Element';

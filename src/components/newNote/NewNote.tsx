@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import NoteForm from "./noteForm/NoteForm";
-import NoteContext from "../store/note-context";
+import NoteForm from "../noteForm/NoteForm";
+import NoteContext from "../../store/note-context";
 
 const NewNote = () => {
 	// @ts-ignore

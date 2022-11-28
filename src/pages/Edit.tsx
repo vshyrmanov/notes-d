@@ -1,5 +1,5 @@
 import React from 'react';
-import EditNote from "../components/EditNote";
+import EditNote from "../components/editNote/EditNote";
 
 const Edit = () => {
 	return (

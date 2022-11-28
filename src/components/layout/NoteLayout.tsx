@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Navigate, Outlet, useOutletContext, useParams} from "react-router-dom";
-import NoteContext from "../store/note-context";
-import { Note } from '../store/NoteProvider';
+import NoteContext from "../../store/note-context";
+import { Note } from '../../store/NoteProvider';
 
 const NoteLayout = () => {
 	// @ts-ignore

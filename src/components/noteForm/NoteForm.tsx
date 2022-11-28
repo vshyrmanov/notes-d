@@ -7,20 +7,8 @@ import NoteContext from "../../store/note-context";
 import {NoteData, Tag, Image} from "../../store/NoteProvider";
 import classes from './NoteForm.module.css';
 import NeobrutalButton from '../UI/neobrutalButton/NeobrutalButton';
-
-type NoteFormProps = {
-	onSubmit: (data: NoteData) => void,
-} & Partial<NoteData>
-
-type PreviewImageModalProps = {
-	show: boolean,
-	handleClose: () => void,
-	imageUrl: string,
-}
-
-interface Event<T = EventTarget> {
-	target: T
-}
+import { NoteFormProps, PreviewImageModalProps } from './types';
+import PreviewImg from '../modals/previewImg/PreviewImg';
 
 const NoteForm = ({ title = "", markdown = "", tags = [], imgs = [], onSubmit  }: NoteFormProps) => {
 	// @ts-ignore
@@ -33,7 +21,7 @@ const NoteForm = ({ title = "", markdown = "", tags = [], imgs = [], onSubmit  }
 	const [showImage, setShowImage] = useState<Image[]>(imgs);
 	const [showModal, setShowModal] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
-	
+
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		onSubmit({
@@ -123,14 +111,11 @@ const handleCloseModal = () => setShowModal(false);
 									>
 										&times;
 									</Button>
-									<img
-											className={classes.editImage}
-											src={imageItem.imageUrl}
-									/>
+									<img className={classes.editImage} src={imageItem.imageUrl}/>
 								</Card>
 						)}
 					</Stack>}
-					<PreviewImageModal show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
+					<PreviewImg show={showModal} handleClose={handleCloseModal} imageUrl={previewImage} />
 					<Stack direction="horizontal" gap={2} className="justify-content-end">
 						<NeobrutalButton type="button" as="label" htmlFor="img_file" variant="primary">Add attachment</NeobrutalButton>
 						<input
@@ -141,7 +126,6 @@ const handleCloseModal = () => setShowModal(false);
 						/>
 					</Stack>
 					<Stack direction="horizontal" gap={2} className="justify-content-end">
-
 						<NeobrutalButton type="submit" variant="primary">Save</NeobrutalButton>
 						<Link to="..">
 							<NeobrutalButton type="button" variant="outline-secondary">Cancel</NeobrutalButton>
@@ -153,16 +137,3 @@ const handleCloseModal = () => setShowModal(false);
 };
 
 export default NoteForm;
-
-export function PreviewImageModal ({ show, handleClose, imageUrl }: PreviewImageModalProps) {
-	return (
-			<Modal show={show} onHide={handleClose} size="lg">
-				<Modal.Header closeButton />
-				<Modal.Body>
-						<Stack gap={2}>
-							<img src={imageUrl} alt="image_preview" />
-						</Stack>
-				</Modal.Body>
-			</Modal>
-	)
-}
